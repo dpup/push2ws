@@ -4,9 +4,7 @@
 // WebSocket bridge. WebSocket clients can connect to /bridge?feed=FEED_URL in
 // order to be notified of updates published to the feed's hub.
 //
-// <pre>
-//   var conn = new WebSocket('ws://my.bridge.com/bridge?feed=' + encodeURIComponent(feedURL));
-// </pre>
+//   var conn = new WebSocket('ws://my.bridge.com/bridge?feed=' + feedURL);
 //
 // To function, the server needs to be publicly accessible in order for the PuSH
 // hub to send updates.
@@ -49,9 +47,9 @@ func NewBridge(allowCrossOrigin bool) *Bridge {
 
 // Start registers handles on DefaultServeMux and starts up a HTTP server using
 // ListenAndServe.
-// 'self' the host and ip that remote clients should connect to.
-// 'addr' ip address that the server should listen on, "" is default.
-// 'port' that the server should listen on.
+//   'self' the host and ip that remote clients should connect to.
+//   'addr' ip address that the server should listen on, "" is default.
+//   'port' that the server should listen on.
 func (b *Bridge) Start(self string, addr string, port int) {
 	log.Printf("Setting up server on %s:%d", addr, port)
 	b.pushClient = gohubbub.NewClient(self, "strimmer")
